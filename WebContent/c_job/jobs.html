@@ -1,0 +1,127 @@
+
+
+<style type="text/css">
+input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+    width: 100%;
+}
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+   /*  border: 1px solid #ccc; */
+    background-color:#81D6DE;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #1086B9;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #1086B9;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
+
+<div style="background-color: ;padding-left: 20%;padding-top: 2%;padding-right: 5%">
+		
+		
+		
+  <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">AVAILABLE JOBS</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">APPLIED JOBS</button>
+  
+</div>
+
+<div id="London" class="tabcontent">
+<div data-ng-controller="UserController as ctrl">
+		<div class="row" data-ng-repeat="j in jobs">
+			<div class="col-sm-12">
+				<table class="table" style="box-shadow: 5px 5px 5px #111; font: bold; color: black">
+					<tr style="font: bold;">
+						<td colspan="3"><h3><strong>{{j.title}}</strong></h3></td>
+					</tr>
+					<tr style="font: bold;">
+						<td>Organization: {{j.company}}</td>
+						<td>Position: {{j.position}}</td>
+						<td>Location: {{j.location}}</td>
+					</tr>
+					<tr style="font: bold;">
+						<td>Package: {{j.salary}}</td>
+						<td>Job Status: OPEN</td>
+						<td>Vacancies: {{j.vacancy}}</td>
+						<td></td>
+					</tr>
+					<tr style="font: bold;">
+						<td>Minimum 10th: {{j.q_10}}</td>
+						<td>Minimum 12th: {{j.q_12}}</td>
+						<td>Minimum UG %: {{j.q_ug}}</td>
+					</tr>					
+					<tr style="font: bold;">
+						<td colspan="3">Description: {{j.description}}</td>
+					</tr>
+					<tr>
+						<td colspan="3"><p style="text-align: right"><a href="" class="btn btn-primary btn-lg" data-ng-click="ctrl.applyJob(j)" >Apply Job</a></p>
+					</tr>
+				</table>
+			</div>
+		
+		</div>
+	</div>
+
+  
+</div>
+
+<div id="Paris" class="tabcontent">
+<div  data-ng-controller="UserController as ctrl">
+		<div class="row" data-ng-repeat="j in myJobs">
+			<div class="col-sm-12">
+				<table class="table" style="box-shadow: 5px 5px 5px #111; font: bold; color: black">
+					<tr style="font: bold;">
+						<td colspan="3"><h3><strong>{{j.title}}</strong></h3></td>
+					</tr>
+					<tr style="font: bold;">
+						<td>Organization: {{j.company}}</td>
+						<td>Position: {{j.position}}</td>
+						<td>Location: {{j.location}}</td>
+					</tr>
+					
+					<!-- <tr>
+						<td colspan="3"><p style="text-align: right"><a href="" class="btn btn-primary btn-lg" data-ng-click="ctrl.applyJob(j)">Apply Job</a></p>
+					</tr> -->
+				</table>
+			</div>
+		
+		</div>
+	</div>
+  
+</div>
+
+
+
+</div>

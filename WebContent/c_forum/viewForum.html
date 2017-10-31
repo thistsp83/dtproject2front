@@ -1,0 +1,41 @@
+
+<div style="padding-left: 300px;padding-right: 100px" >
+<div data-ng-controller="ForumController as ctrl">
+	<h2 style="text-align: left;"><strong>{{gforum.forum_id}}</strong></h2>
+	<h4>written by <strong>{{gforum.username}}</strong></h4>
+	<h4>posted: <strong>{{gforum.date_time}}</strong></h4>
+	<br>
+	<p style="text-align: justify; font: bold;">{{gforum.description}}</p>
+
+</div>
+
+<h3 style="font: italic; text-align: center;" data-ng-show="forumReplies">Replies</h3>
+
+<div  data-ng-repeat="c in forumReplies">
+	<img  data-ng-src="resources/images/{{c.username}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle" height="45" width="45">
+	<div style="box-shadow: 5px 5px 5px #888888;" ><br><font style="font-size: large;">{{c.username}}</font> on {{c.postedAt}}
+	<br>{{c.reply}}<br>&nbsp;<br>
+	</div>
+	
+	</div>
+
+
+<div data-ng-controller="ForumController as ctrl">
+
+				<div  style="box-shadow: 5px 5px 5px #888888;" >
+				<img data-ng-src="resources/images/{{currentUser.username}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle"  onerror="this.src='images/profilepic.png'" height="45" width="45">
+	
+					<form data-ng-submit="ctrl.addReply(gforum.id)">
+						
+							
+								<textarea required="required" class="form-control" data-ng-model="forumReply.reply" rows="3" cols="45" placeholder="Your Reply Here"></textarea>	
+							
+								<input type="submit"  value="Post" class="btn btn-default btn-block" style="text-align: center;">
+							
+						
+					</form>
+				</div>
+	
+
+	</div>
+</div>

@@ -1,0 +1,49 @@
+<div style="padding-left: 300px;padding-right: 100px"  >
+	<div data-ng-controller="BlogController as ctrl">
+	<h2 style="text-align: left;"><strong>{{gBlog.blog_title}}</strong></h2>
+	<h4>written by <strong>{{gBlog.username}}</strong></h4>
+	<h4>posted: <strong>{{gBlog.date_time}}</strong></h4>
+	<br>
+	<p style="text-align: justify; font: bold;">{{gBlog.description}}</p>
+
+<a class="btn btn-md" href="" data-ng-click="ctrl.blogLike(gBlog.blog_title)" class="btn"><button class="btn btn-block btn-primary"><i class="fa fa-thumbs-up"></i> Like</button></a>
+
+<h3 style="font: italic; text-align: center;" data-ng-show="blogComments">Comments</h3>
+{{blogComments}}
+<div  data-ng-repeat="c in blogComments">
+	<img  data-ng-src="resources/images/{{c.username}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle" height="45" width="45">
+	<div style="box-shadow: 5px 5px 5px #888888;" ><br><font style="font-size: large;">{{c.username}}</font> on {{c.postedAt}}
+	<br>{{c.comment}}<br>&nbsp;<br>
+	</div>
+	
+	</div>
+	<div  data-ng-controller="BlogController as ctrl">
+				<div  style="box-shadow: 5px 5px 5px #888888;" >
+				<!-- <img data-ng-src="resources/images/{{currentUser.username}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle"  onerror="this.src='images/profilepic.png'" height="45" width="45">
+				 -->	<form data-ng-submit="ctrl.addComment(gBlog.blog_title)">
+					
+								<textarea  class="form-control" required="required" data-ng-model="blogComment.comment" rows="3" cols="45" placeholder="Your Comment Here"></textarea><br>	
+							
+							Rating
+								<select data-ng-model='blogComment.rating' required="required"  >
+			                        <option value=0 selected="selected">NIL</option>
+			                        <option value=1>1</option>
+			                        <option value=2>2</option>
+			                        <option value=3>3</option>
+			                        <option value=4>4</option>
+			                        <option value=5>5</option>
+			                    </select>
+			                    <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
+							
+								<!-- <input type="submit" value="Post" class="btn btn-default btn-block" style="text-align: center;">
+							 -->
+						
+					</form>
+				</div>
+	
+</div>
+	</div>
+
+</div>
+
+

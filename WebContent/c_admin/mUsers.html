@@ -1,0 +1,174 @@
+
+
+<style type="text/css">
+input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+    width: 100%;
+}
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+   /*  border: 1px solid #ccc; */
+    background-color:#81D6DE;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #1086B9;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #1086B9;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
+
+<div style="background-color: ;padding-left: 20%;padding-top: 2%;padding-right: 5%">
+		
+		
+		
+  <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">ALL USERS</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">NEW REQUESTS</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">REJECTED USERS</button>
+  
+  
+</div>
+
+<div id="London" class="tabcontent">
+<div data-ng-controller='AdminController as ctrl'>
+<div class="container2" data-ng-if="users"  data-ng-repeat="u in users">
+<br>
+	<div class="row" style=" box-shadow: 5px 5px 5px #000;">
+		<div class="col-sm-9" style="float:right; ">
+			
+		<div data-ng-if="currentUser.username != u.username">
+			
+		<table class="table table-hover table-responsive">
+				<tr>
+					<td style="color: black"><h5><strong>{{u.username}}</strong> </h5></td>
+					<td style="color: black"><h5><strong> {{u.mail}}</strong></h5></td>
+					<td style="color: black"><h4><strong>{{u.f_name}} {{u.l_name}}</strong> </h4></td>
+					<td style="color: black"><h5><strong> {{u.role}}</strong></h5></td>
+					<td data-ng-if="u.status == 'A'" style="color: black"><h5><strong> ACCEPTED</strong></h5></td>
+					
+					<td data-ng-if="u.status == 'N'" style="color: black"><h5><strong>NEW USER</strong> </h5></td>
+					
+					<td data-ng-if="u.status == 'R'" style="color: black"><h5><strong> REJECTED</strong></h5></td>
+			<td><a data-ng-if="u.status != 'A'" class="btn btn-success btn-md" href="" data-ng-click="ctrl.acceptUser(u)" class="btn">ACCEPT USER</a></td>	
+			<td><a data-ng-if="u.status != 'R'" class="btn btn-danger btn-md" href="" data-ng-click="ctrl.rejectUser(u)" class="btn">REJECT USER</a></td>
+		</tr>
+		</table>
+		</div>
+			
+		</div>
+	</div>
+</div>
+<div>
+	<h2> {{message}} </h2>
+</div>
+</div>
+  
+</div>
+
+<div id="Paris" class="tabcontent">
+<div data-ng-controller='AdminController as ctrl'>
+<div class="container2" data-ng-if="users"  data-ng-repeat="u in users">
+<br>
+	<div class="row" style=" box-shadow: 5px 5px 5px #000;">
+		<div class="col-sm-9" style="float:right; ">
+			
+		<div data-ng-if="currentUser.username != u.username && u.status == 'N'">
+			
+		<table class="table table-hover table-responsive">
+		<tr>
+		</tr>
+				<tr>
+					<td style="color: black"><h5><strong>{{u.username}}</strong> </h5></td>
+					<td style="color: black"><h5><strong> {{u.mail}}</strong></h5></td>
+					<td style="color: black"><h4><strong>{{u.f_name}} {{u.l_name}}</strong> </h4></td>
+					<td style="color: black"><h5><strong> {{u.role}}</strong></h5></td>
+					<td data-ng-if="u.status == 'A'" style="color: black"><h5><strong> ACCEPTED</strong></h5></td>
+					
+					<td data-ng-if="u.status == 'N'" style="color: black"><h5><strong>NEW USER</strong> </h5></td>
+					
+					<td data-ng-if="u.status == 'R'" style="color: black"><h5><strong> REJECTED</strong></h5></td>
+			<td><a data-ng-if="u.status != 'A'" class="btn btn-success btn-md" href="" data-ng-click="ctrl.acceptUser(u)" class="btn">ACCEPT USER</a></td>	
+			<td><a data-ng-if="u.status != 'R'" class="btn btn-danger btn-md" href="" data-ng-click="ctrl.rejectUser(u)" class="btn">REJECT USER</a></td>
+		</tr>
+		</table>
+		</div>
+			
+		</div>
+	</div>
+</div>
+<div>
+	<h2> {{message}} </h2>
+</div>
+</div>
+  
+</div>
+
+<div id="Tokyo" class="tabcontent">
+<div data-ng-controller='AdminController as ctrl'>
+<div class="container2" data-ng-if="users"  data-ng-repeat="u in users">
+<br>
+	<div class="row" style=" box-shadow: 5px 5px 5px #000;">
+		<div class="col-sm-9" style="float:right; ">
+			
+		<div data-ng-if="currentUser.username != u.username && u.status == 'R'">
+			
+		<table class="table table-hover table-responsive">
+				<tr>
+					<td style="color: black"><h5><strong>{{u.username}}</strong> </h5></td>
+					<td style="color: black"><h5><strong> {{u.mail}}</strong></h5></td>
+					<td style="color: black"><h4><strong>{{u.f_name}} {{u.l_name}}</strong> </h4></td>
+					<td style="color: black"><h5><strong> {{u.role}}</strong></h5></td>
+					<td data-ng-if="u.status == 'A'" style="color: black"><h5><strong> ACCEPTED</strong></h5></td>
+					
+					<td data-ng-if="u.status == 'N'" style="color: black"><h5><strong>NEW USER</strong> </h5></td>
+					
+					<td data-ng-if="u.status == 'R'" style="color: black"><h5><strong> REJECTED</strong></h5></td>
+			<td><a data-ng-if="u.status != 'A'" class="btn btn-success btn-md" href="" data-ng-click="ctrl.acceptUser(u)" class="btn">ACCEPT USER</a></td>	
+			<td><a data-ng-if="u.status != 'R'" class="btn btn-danger btn-md" href="" data-ng-click="ctrl.rejectUser(u)" class="btn">REJECT USER</a></td>
+		</tr>
+		</table>
+		</div>
+			
+		</div>
+	</div>
+</div>
+<div>
+	<h2> {{message}} </h2>
+</div>
+</div>
+  
+</div>
+
+
+</div>

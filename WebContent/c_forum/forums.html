@@ -1,0 +1,196 @@
+<style type="text/css">
+input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+    width: 100%;
+}
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+   /*  border: 1px solid #ccc; */
+    background-color:#81D6DE;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #1086B9;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #1086B9;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
+
+<div style="background-color: ;padding-left: 20%;padding-top: 2%;padding-right: 5%">
+		
+		
+		
+  <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">Forums</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">My Forums</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Create Forum</button>
+  <button class="tablinks" onclick="openCity(event, 'forum')">Forum Requests</button>
+  
+  
+</div>
+
+<div id="London" class="tabcontent" data-ng-controller="ForumController as ctrl">
+<input type="text"  style="background-color: white;" class="form-control empty" placeholder="Search Forums" data-ng-model="search">
+
+
+	<div  data-ng-repeat="f in forums|filter:{forum_id:search}">
+		<div data-ng-if="f.status == 'A'">
+		
+			<div  style="box-shadow: 5px 5px 5px #000000;">
+				<font style="font-size: large;"><a href="" data-ng-click="ctrl.getForum(f.id)">{{f.forum_id}}</a></font> written by <strong>{{f.username}}</strong><br>
+				<br>
+				<p style="text-align: justify;">{{f.description}}</p>
+				<!-- <p style="text-align: right;"><a href="" data-ng-click="ctrl.getForum(f.id)">... view more</a></p> -->
+				
+			 <a  data-ng-if="f.username != currentUser.username" href="" data-ng-click="ctrl.joinForum(f.id)"><button type="button" class="btn btn-primary">Join Now</button></a>
+			</div>
+	   </div>
+		
+	</div>
+	
+</div>
+
+<div id="Paris" class="tabcontent" data-ng-controller="ForumController as ctrl">
+
+		
+		<input type="text"  style="background-color: white;" class="form-control empty" placeholder="Search Forums" data-ng-model="search">
+
+
+	<div  data-ng-repeat="f in forums|filter:{forum_id:search}">
+		<div data-ng-if="f.username == currentUser.username">
+		
+			<div  style="box-shadow: 5px 5px 5px #000000;">
+				<font style="font-size: large;"><!-- <a href="" data-ng-click="ctrl.getForum(f.id)"> -->{{f.forum_id}}<!-- </a> --></font> written by <strong>{{f.username}}</strong><br>
+				<br>
+				<p style="text-align: justify;">{{f.description}}</p>
+				<p style="text-align: right;"><a href="" data-ng-click="ctrl.getForum(f.id)">... view more</a></p>
+				<div data-ng-if="f.status == 'P'" class="container-fluid">
+						<marquee behavior="slide" direction="left" scrollamount="7" ><h4 style="color: red;">Admin not Approved yet</h4></marquee>
+						
+	          </div>
+	          <div data-ng-if="f.status == 'R'" class="container-fluid">
+						<marquee behavior="slide" direction="left" scrollamount="7" ><h4 style="color: red;">Admin Rejected this Forum</h4></marquee>
+						
+	          </div>
+				
+			</div>
+			<br/>
+			<br/>
+		
+	   </div>
+		
+	</div>		
+		 
+		
+	
+	<div data-ng-if="!forums">
+						You Have no Forums...
+	</div>
+  
+</div>
+
+<div id="Tokyo" class="tabcontent" data-ng-controller="ForumController as ctrl">
+ <form role="form" data-ng-submit="ctrl.addForum()">
+					<table class="table table-hover black" style="box-shadow: 10px 10px 5px #000000;" >
+						<tr>
+							<td>TITLE</td>
+							<td><input type="text" class="form-control" autofocus="autofocus" maxlength="200" placeholder="Enter Forum Title" data-ng-model="forum.forum_id"></td>
+						</tr>
+						<tr>
+							<td>DESCRIPTION</td>
+							<td><textarea rows="5" cols="50" class="form-control" placeholder="Describe your forum here" data-ng-model="forum.description"></textarea>
+						</tr>
+						<tr>
+							<td rowspan="2"><input type="submit" class="btn btn-info" value="Submit Blog"></td>
+							<td><input type="reset" class="btn btn-info" value="Clear"> </td>
+						</tr>
+					</table>
+			</form>
+</div>
+<div id="forum" class="tabcontent" data-ng-controller="ForumController as ctrl">
+
+		
+		<input type="text"  style="background-color: white;" class="form-control empty" placeholder="Search Forums" data-ng-model="search">
+
+
+	<div  data-ng-repeat="f in forumjoin|filter:{forum_title:search}">
+		<div data-ng-if="f.username == currentUser.username && f.status == 'P'">
+		
+			<!-- <div  style="box-shadow: 5px 5px 5px #000000;">
+				<font style="font-size: large;"><a href="" data-ng-click="ctrl.getForum(f.id)">{{f.forum_title}}</a></font> written by <strong>{{f.participate_id}}</strong><br>
+				<br>
+				<p style="text-align: justify;">{{f.forum_desc}}</p>
+				<p style="text-align: right;"><a href="" data-ng-click="ctrl.getForum(f.id)">... view more</a></p>
+				<div data-ng-if="f.status == 'P'" class="container-fluid">
+						<marquee behavior="slide" direction="left" scrollamount="7" ><h4 style="color: red;">Admin not Approved yet</h4></marquee>
+						
+	          </div>
+	          <div data-ng-if="f.status == 'R'" class="container-fluid">
+						<marquee behavior="slide" direction="left" scrollamount="7" ><h4 style="color: red;">Admin Rejected this Forum</h4></marquee>
+						
+	          </div>
+				
+			</div> -->
+			<div class="col-sm-6">
+									<table class="table">
+										<tr>
+											<td><h1></h1><strong>{{f.forum_title}}</strong></h1></td>
+									
+											<td><strong>{{f.participate_id}}</strong></td>
+										
+													
+							
+								<!-- <td><div class="col-sm-2">
+									<a href="" class="btn btn-success" data-ng-click="acceptRequest(f.join_id)">Accept Request</a>				
+								</div></td> -->
+								</tr>
+								</table>
+									</div>
+								
+			<br/>
+			<br/>
+		
+	   </div>
+		
+	</div>		
+		 
+		
+	
+	<div data-ng-if="!forums">
+						You Have no Forums...
+	</div>
+  
+</div>
+
+
+</div>

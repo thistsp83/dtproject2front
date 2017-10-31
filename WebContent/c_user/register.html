@@ -1,0 +1,81 @@
+<div class="container"  data-ng-controller="UserController as rData">
+   <!-- <div id="signup">
+      <div class="signup-screen">
+        -->  <div class="space-bot text-center">
+            <h1>Sign up</h1>
+           
+         </div>
+         <br/>
+           <form class="form-register" method="post" name="register" data-ng-submit="rData.register()" novalidate>
+	            <h3>Account Details</h3>
+           		
+           		 <div class="input-group">
+     			 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    			  <input id="username" type="text" class="form-control" name="username" data-ng-model="rData.newUser.username" placeholder="User Name" data-ng-required>
+   			   </div> 
+   			   <br/>
+	           
+              	<div class="input-group">
+   				 <div class="input-group-addon">
+   				   @
+   				 </div>
+  			  <input class="form-control" id="email" name="remail" data-ng-model="rData.newUser.mail" type="email" placeholder="Email" data-ng-required/>
+ 			 </div>
+              	<br/>
+              	
+               	<span class="alert alert-danger" data-ng-show="form-register.rData.newUser.mail.$error.email">Your email is invalid.</span>
+              	
+              	 <div class="input-group">
+   				 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+  			     <input id="password" type="password" class="form-control" name="rpassword" data-ng-model="rData.newUser.password"  data-ng-minlength='6' placeholder="Password" data-ng-required>
+  			  </div>
+              	
+              <br/>
+               	<p class="alert alert-danger" data-ng-show="form-register.rData.newUser.password.$error.minlength && form.password.$invalid">Your password must be at least 6 characters.</p>
+               	
+               	<h3>Personal Details</h3>
+           		<div class="divider"></div>
+               <div class="input-group">
+     			 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    			  <input id="f_name" type="text" class="form-control" name="f_name" data-ng-model="rData.newUser.f_name" placeholder="First Name" data-ng-required>
+   			   </div> 
+	           <br/>
+                <div class="input-group">
+     			 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    			  <input id="last-name" type="text" class="form-control" name="txtLastName" data-ng-model="rData.newUser.l_name" placeholder="Last Name" data-ng-required>
+   			   </div> 
+	           <br/>
+               	
+               	<div class="input-group">
+             	      <label for="role">Role</label>
+                    <select data-ng-model='rData.newUser.role' required="required" id="role">
+                        <option value="STUDENT">STUDENT</option>
+                        <option value="ALUMINI">ALUMINI</option>
+                        <option value="FACULTY">FACULTY</option>
+                    </select>
+                   
+                </div><br/>
+                
+                <div class="input-field col s6">
+               <label>Gender</label>
+                    <input type="radio" name="gender" data-ng-model='rData.newUser.gender' value="M" checked="checked"/>
+                    <label class="gender">Male</label>
+                    <input type="radio" name="gender" data-ng-model='rData.newUser.gender' value="F"/>
+                    <label class="gender">Female</label>
+                     
+                </div>
+                
+              
+              <div class="space-top text-center">
+               <button data-ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
+               <i class="material-icons left">done</i> Done
+               </button>
+               <button type="button" class="waves-effect waves-light btn cancel">
+               <i class="material-icons left">clear</i>Cancel
+               </button>
+              </div>
+              
+             </form>
+          <!--  </div>
+        </div> -->
+    </div>

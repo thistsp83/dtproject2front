@@ -1,0 +1,197 @@
+
+<style type="text/css">
+input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+    width: 100%;
+}
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+   /*  border: 1px solid #ccc; */
+    background-color:#81D6DE;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #1086B9;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #1086B9;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
+
+<div style="background-color: ;padding-left: 20%;padding-top: 2%;padding-right: 5%">
+		
+		
+		
+  <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">Blogs</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">My Blogs</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Post Blog</button>
+  
+  
+</div>
+
+<div id="London" class="tabcontent">
+<input type="text"  style="background-color: white;" class="form-control empty" placeholder="Search Blogs" data-ng-model="search">
+	<div data-ng-repeat="b in blogs|filter:{blog_title:search}">
+	
+		<div data-ng-if="b.status == 'Approved' || b.status == 'Updated'">
+		<div class="well">
+      <div class="media">
+      	<a class="pull-left" href="#">
+    		<img class="media-object" src="resources/images/blog.png">
+  		</a>
+  		<div class="media-body">
+    		<h4 class="media-heading"><a href="" data-ng-click="getBlog(b.blog_title)">{{b.blog_title}}</a></h4>
+          <p class="text-right">By {{b.username}}</p>
+          <p>{{b.description}}</p>
+          <ul class="list-inline list-unstyled">
+  			<li><span>Status - {{b.status}}</span></li>
+            <li>|</li>
+            <span>Likes({{b.likes}})</span>
+            <li>|</li>
+           
+            <li>
+            <!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
+              <span><i class="fa fa-facebook-square"></i></span>
+              <span><i class="fa fa-twitter-square"></i></span>
+              <span><i class="fa fa-google-plus-square"></i></span>
+            </li>
+            
+			</ul>
+       </div>
+    </div>
+  </div>
+		<!-- <div class="row" >
+			
+			<div class="col-sm-12 black" style="box-shadow: 5px 5px 5px #000000;width: 100%">
+				<font style="font-size:xx-large;"><a href="" data-ng-click="getBlog(b.blog_title)">{{b.blog_title}}</a></font> written by <strong>{{b.username}}</strong><br>
+				<br>
+				<font style="font-size:large;"><strong>Likes({{b.likes}})</strong><br></font>
+				
+				<p style="text-align: justify;">{{b.description}}
+			</div>
+			<div class="col-sm-2"></div>
+		 </div>	&nbsp;<br> -->
+		</div>
+	</div>
+	<div data-ng-if="!blogs">
+						No Blogs are there....
+	</div>
+  
+</div>
+
+<div id="Paris" class="tabcontent">
+<input type="text"  style="background-color: white;" class="form-control empty" placeholder="Search Blogs" data-ng-model="search">
+	<div data-ng-repeat="b in blogs|filter:{blog_title:search}">
+		<div data-ng-if="b.username == currentUser.username">
+		<!-- <div class="row" >
+			
+			<div class="col-sm-12 black" style="box-shadow: 5px 5px 5px #000000;width: 100%">
+				<font style="font-size: large;"><strong><a href="" data-ng-click="getBlog(b.blog_title)">{{b.blog_title}}</a></strong></font>
+				<div data-ng-if="b.status == 'Rejected'" class="container-fluid">
+						<marquee behavior="slide" direction="left" scrollamount="7" ><h4 style="color: red;">Admin not Approved yet</h4></marquee>
+						
+	     </div>
+				<br>
+				<p style="text-align: justify;">{{b.description}}
+				
+			</div>
+			<div class="col-sm-2"></div>
+			
+		 </div>	&nbsp;<br> -->
+		 <div class="well">
+      <div class="media">
+      	<a class="pull-left" href="#">
+    		<img class="media-object" src="resources/images/blog.png">
+  		</a>
+  		<div class="media-body">
+    		<h4 class="media-heading"><a href="" data-ng-click="getBlog(b.blog_title)">{{b.blog_title}}</a></h4>
+          <p class="text-right">By {{b.username}}</p>
+          <p>{{b.description}}</p>
+          <ul class="list-inline list-unstyled">
+  			<li><span>Status - {{b.status}}</span></li>
+            <li>|</li>
+            <span>Likes({{b.likes}})</span>
+            <li>|</li>
+           
+            <li>
+            <!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
+              <span><i class="fa fa-facebook-square"></i></span>
+              <span><i class="fa fa-twitter-square"></i></span>
+              <span><i class="fa fa-google-plus-square"></i></span>
+            </li>
+            
+			</ul>
+			<div data-ng-if="b.status == 'Submitted'" class="container-fluid">
+						<marquee behavior="slide" direction="left" scrollamount="7" ><h4 style="color: red;">Admin not Approved yet</h4></marquee>
+						
+	     </div>
+	      <div data-ng-if="b.status == 'Rejected'" class="container-fluid">
+						<marquee behavior="slide" direction="left" scrollamount="7" ><h4 style="color: red;">Admin Rejected Your Blog</h4></marquee>
+						
+	     </div>
+       </div>
+    </div>
+  </div>
+		 
+		</div>
+	</div>
+	<div data-ng-if="!blogs">
+						You Have no Blogs...
+	</div>
+  
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <div data-ng-controller="BlogController as ctrl">
+	
+			<form role="form" data-ng-submit="addBlog()">
+				<table class="table table-hover black" style="box-shadow: 10px 10px 5px #000000;width: 100%" >
+						<tr>
+							<td>TITLE</td>
+							<td><input type="text" class="form-control" autofocus="autofocus" maxlength="200" placeholder="Enter Blog Title" data-ng-model="blog.blog_title"></td>
+						</tr>
+						<tr>
+							<td>DESCRIPTION</td>
+							<td><textarea rows="5" cols="50"  class="form-control" placeholder="Describe your blog here" data-ng-model="blog.description"></textarea>
+						</tr>
+						<tr>
+							<td rowspan="2"><input type="submit" value="Create Blog" class="btn btn-info"></td>
+							<td><input type="reset" value="Clear" class="btn btn-info"> </td>
+						</tr>	
+					</table>
+			</form>
+	</div>
+
+</div>
+
+</div>
